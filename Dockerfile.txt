@@ -1,39 +1,44 @@
+# Stage 1: Base image with Node.js
 FROM node:18-alpine AS base
-
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# Stage 2: Install dependencies
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
 COPY package*.json ./
 RUN npm ci
 
+# Stage 3: Build the application
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-ENV NEXT_TELEMETRY_DISABLED 1
-
 RUN npm run build
 
+# Stage 4: Production image
 FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Create a non-root user and group
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 --ingroup appgroup appuser
 
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+# Copy necessary files with correct ownership
+# We need package.json and node_modules (with dev deps like vite) to run `npm run preview`.
+COPY --from=deps --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --chown=appuser:appgroup package.json .
 
-USER nextjs
+# Copy the built application from the builder stage
+COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
+
+USER appuser
 
 EXPOSE 3000
-
 ENV PORT 3000
 
-CMD ["npm", "start"]
+# Command to run the app using Vite's preview server
+# `--host 0.0.0.0` makes it accessible from outside the container.
+# Vite preview should respect the PORT env var.
+CMD ["npm", "run", "preview", "--", "--host", "0.0.0.0"]

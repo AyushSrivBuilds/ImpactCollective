@@ -53,7 +53,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                     
                     <div className="flex-1">
                       <h3 className="font-medium">{item.title}</h3>
-                      <p className="text-green-600">${item.price.toFixed(2)}</p>
+                      <p className="text-green-600">₹{item.price.toFixed(2)}</p>
                       
                       <div className="flex items-center gap-2 mt-2">
                         <button
@@ -90,7 +90,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
             <div className="border-t p-4">
               <div className="flex justify-between mb-4">
                 <span className="font-semibold">Total:</span>
-                <span className="font-semibold">${displayTotal.toFixed(2)}</span>
+                <span className="font-semibold">₹{displayTotal.toFixed(2)}</span>
               </div>
               
               <button className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200">

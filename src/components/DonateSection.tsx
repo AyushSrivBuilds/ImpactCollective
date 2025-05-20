@@ -21,7 +21,7 @@ const DonateSection: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real app, this would handle the donation processing
-    alert(`Thank you for your donation of $${amount}!`);
+    alert(`Thank you for your donation of ₹${amount}!`);
   };
   
   return (
@@ -127,7 +127,7 @@ const DonateSection: React.FC = () => {
           }`}
         >
           <Heart className="w-5 h-5 mr-2" />
-          {amount && amount > 0 ? `Donate $${amount}` : 'Select an amount'}
+          {amount && amount > 0 ? `Donate ₹${amount}` : 'Select an amount'}
         </button>
       </form>
     </div>

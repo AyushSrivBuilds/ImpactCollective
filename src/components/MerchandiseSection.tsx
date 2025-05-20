@@ -71,7 +71,7 @@ const MerchandiseSection: React.FC<MerchandiseSectionProps> = ({ campaign }) => 
             <div className="p-4">
               <h4 className="font-semibold text-gray-800 mb-2">{item.title}</h4>
               <div className="flex justify-between items-center">
-                <span className="text-green-600 font-medium">${item.price.toFixed(2)}</span>
+                <span className="text-green-600 font-medium">₹{item.price.toFixed(2)}</span>
                 <div className="flex items-center gap-2">
                   {showQuantity[item.id] && (
                     <>

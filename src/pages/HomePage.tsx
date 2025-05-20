@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
               <div className="text-green-200">Supporters</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">$250K+</div>
+              <div className="text-4xl font-bold mb-2">₹250K+</div>
               <div className="text-green-200">Funds Raised</div>
             </div>
             <div>

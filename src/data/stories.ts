@@ -19,7 +19,7 @@ export const stories: Story[] = [
     author: 'Elena Muthoni',
     location: 'Nakuru County, Kenya',
     category: 'Health & Sanitation',
-    imageUrl: '/water5.jpg', // Health & Sanitation: Water tap
+    imageUrl: 'https://static.pib.gov.in/WriteReadData/userfiles/image/image001RLSL.jpg', // Health & Sanitation: Water tap
   },
   {
     id: 'story-2',

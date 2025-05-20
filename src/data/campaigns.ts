@@ -24,7 +24,7 @@ export const campaigns: Campaign[] = [
     cause: 'Environment',
     community: 'IIFT Delhi',
     context: 'Environment Campaign',
-    imageUrl: '/Clean_beach.png',
+    imageUrl: 'https://assets.theoceancleanup.com/scaled/1100x/app/uploads/2021/08/211008-Oceans-System-002-Trip-2-Offload-S1H-DvdK-85-scaled.jpg.webp',
     merchandise: [
       {
         id: '1-1',
